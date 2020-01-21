@@ -1,7 +1,7 @@
 import React from 'react';
-import {Topbar} from "./Topbar"
-import {Register} from "./Register"
-import './App.css';
+import {Topbar} from "../components/Topbar"
+import {Register} from "../components/Register"
+import '../styles/App.css';
 
 function App() {
   return (

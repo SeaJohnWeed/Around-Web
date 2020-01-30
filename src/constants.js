@@ -8,3 +8,6 @@ export const GEOLOCATION_OPTIONS = {
   maximumAge: 3600000,
   timeout: 27000,
 };
+export const POSITION_NOISE = 0.02;
+export const POST_TYPE_IMAGE = 'image';
+export const POST_TYPE_VIDEO = 'video';

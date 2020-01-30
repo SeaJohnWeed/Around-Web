@@ -2,14 +2,37 @@ import React from 'react';
 import '../styles/Login.css'
 import { Link } from 'react-router-dom'
 
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import {Form, Icon, Input, Button, Checkbox, message} from 'antd';
+import {API_ROOT} from "../constants"
 
 class NormalLoginForm extends React.Component {
+
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
+      let lastResponse;
       if (!err) {
         console.log('Received values of form: ', values);
+        fetch(`${API_ROOT}/login`, {
+          method: 'POST',
+          body: JSON.stringify({
+            username: values.username,
+            password: values.password,
+          }),
+        }).then((response) => {
+          lastResponse = response;
+          //debugger;
+          return response.text();
+        }, (error) => {
+          console.log('Error');
+        }).then((text) => {
+          if (lastResponse.ok) {
+            message.success('Login success!');
+            this.props.handleLogin(text);
+          } else {
+            message.error(text);
+          }
+        });
       }
     });
   };
